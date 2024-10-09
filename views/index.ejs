@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+    .question {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    .question span {
+      display: block;
+    }
+    .question .english {
+      font-weight: bold;
+    }
+    .question .chinese {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>MBTI Test</h1>
+
+  <% if (errors.length > 0) { %>
+    <ul class="error">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <form action="/submit" method="POST">
+    <% questions.forEach((question, index) => { %>
+      <div class="question">
+        <span class="english"><%= question.english %></span>
+        <span class="chinese"><%= question.chinese %></span>
+        <input type="text" name="answer<%= index + 1 %>" id="q<%= index %>" required>
+      </div>
+    <% }) %>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>
